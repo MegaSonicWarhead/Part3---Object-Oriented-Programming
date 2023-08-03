@@ -22,7 +22,7 @@ namespace Part2___Object_Oriented_Programming
                 GameLogic newGameObject = new GameLogic();
                 newGameObject.Checkguess(Convert.ToInt16(myObj.userGuess));
             }
-
+            //jy is vet
 
         }
 
