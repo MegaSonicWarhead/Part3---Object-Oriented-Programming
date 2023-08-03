@@ -17,7 +17,7 @@ namespace Part2___Object_Oriented_Programming
             {
 
                 NumberGuessingGame myObj = new NumberGuessingGame();
-
+//help
                 myObj.userGuess = Console.ReadLine();
                 GameLogic newGameObject = new GameLogic();
                 newGameObject.Checkguess(Convert.ToInt16(myObj.userGuess));
