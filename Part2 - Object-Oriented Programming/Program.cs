@@ -12,56 +12,72 @@ namespace Part2___Object_Oriented_Programming
     {
         class NumberGuessingGame
         {
-            private string userGuess;
-            public void Play(string[] args)
+            private int userGuess;
+            private string guessResult;
+            private readonly GameLogic newGameObject;
+            public NumberGuessingGame() // class constructor
             {
-
-                NumberGuessingGame myObj = new NumberGuessingGame();
-
-                myObj.userGuess = Console.ReadLine();
-                GameLogic newGameObject = new GameLogic();
-                newGameObject.Checkguess(Convert.ToInt16(myObj.userGuess));
+                newGameObject = new GameLogic();
             }
-            
 
+            public void  Play()
+            {
+                string message = "";
+                Console.WriteLine("Guess the random number!");
+                do
+                {
+                    userGuess = Convert.ToInt32(Console.ReadLine());
+                    guessResult = newGameObject.CheckGuess(userGuess);
+
+                    if (guessResult == "Match")
+                    {
+                        message = "Congratulations! You guessed the number!";
+                        
+                    }
+                    else
+                    {
+                        message = guessResult;
+                    }
+
+                    Console.WriteLine(message);
+                }
+                while (guessResult != "Match");
+                Console.ReadKey();
+            }
         }
 
         class GameLogic
         {
-            public static int GetRandomNumber()
+            public GameLogic() // class constructor
             {
                 Random random = new Random();
-                int value1 = random.Next(1, 101);
-                return value1;
+                randomValue = random.Next(1, 101);
             }
-            public int randomValue = GetRandomNumber();
 
-            public void Checkguess(int userGuess)
+            public string CheckGuess(int userGuess)
             {
-                bool checkGuess = false;
-                string message;
-                while (!checkGuess)
+                if (randomValue == userGuess)
                 {
-                    GameLogic randomNumber = new GameLogic();
-                    if (userGuess == randomNumber.randomValue)
-                    {
-                        message = "Correct guess!";
-                    }
-                    else
-                    {
-                        message = "Incorrect guess";
-                        userGuess = Convert.ToInt32(Console.ReadLine());
-                    }
-                    Console.WriteLine(message);
+                    return "Match";
+                }
+                else if (randomValue < userGuess)
+                {
+                    return "Too High";
+                }
+                else
+                {
+                    return "Too Low";
                 }
             }
 
-            static void Main(string[] args)
-            {
-                Console.WriteLine("Guess a random number!");
-                NumberGuessingGame newNumberGuessingGame = new NumberGuessingGame();
-                newNumberGuessingGame.Play(args);
-            }
+            private int randomValue;
         }
+
+        static void Main(string[] args)
+        {
+            NumberGuessingGame numberGuessingGameObj = new NumberGuessingGame();
+            numberGuessingGameObj.Play();
+        }
+
     }
 }
