@@ -13,6 +13,7 @@ namespace Part2___Object_Oriented_Programming
         class NumberGuessingGame
         {
             private int userGuess;
+            private bool gameComplete = false;
             private string guessResult;
             private readonly GameLogic newGameObject;
             public NumberGuessingGame() // class constructor
@@ -22,27 +23,38 @@ namespace Part2___Object_Oriented_Programming
 
             public void  Play()
             {
-                string message = "";
-                Console.WriteLine("Guess the random number!");
-                do
+                while (!gameComplete)
                 {
-                    userGuess = Convert.ToInt32(Console.ReadLine());
-                    guessResult = newGameObject.CheckGuess(userGuess);
-
-                    if (guessResult == "Match")
+                    string message = "";
+                    Console.WriteLine("Guess the random number!");
+                    do
                     {
-                        message = "Congratulations! You guessed the number!";
-                        
-                    }
-                    else
-                    {
-                        message = guessResult;
-                    }
+                        userGuess = Convert.ToInt32(Console.ReadLine());
+                        guessResult = newGameObject.CheckGuess(userGuess);
 
-                    Console.WriteLine(message);
+                        if (guessResult == "Match")
+                        {
+                            message = "Congratulations! You guessed the number!";
+
+                        }
+                        else
+                        {
+                            message = guessResult;
+                        }
+
+                        Console.WriteLine(message);
+                    }
+                    while (guessResult != "Match");
+                    Console.WriteLine("Do you want to play again? (y/n)");
+                    string playContinue = Console.ReadLine();
+                    if(playContinue == "n")
+                    {
+                        gameComplete = true;
+                        Environment.Exit(0);
+                    }
+                    
                 }
-                while (guessResult != "Match");
-                Console.ReadKey();
+
             }
         }
 
