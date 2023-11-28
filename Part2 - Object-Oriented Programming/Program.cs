@@ -20,7 +20,7 @@ namespace Part2___Object_Oriented_Programming
             {
                 newGameObject = new GameLogic();
             }
-
+            //play
             public void  Play()
             {
                 while (!gameComplete)
